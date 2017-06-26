@@ -2,8 +2,8 @@
 .signUp {
 	position: absolute;
 	width: 400px;
-	padding-left: 40%;
-	padding-right: 40%;
+	margin-left: 40%;
+	margin-right: 40%;
 }
 input {
 	width: 100%;
