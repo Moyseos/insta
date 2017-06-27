@@ -18,7 +18,9 @@ module.exports = sql.define("user", {
 	user_name: {
 		type: Sequelize.STRING,
 		notNull: true,
-	}
-	email:
-	type: Sequelize.
+	},
+	email: {
+		type: Sequelize.STRING,
+		notNull: true,
+	},
 });
