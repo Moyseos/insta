@@ -1,5 +1,8 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
+const User = require("./models/users");
+const sql = require("./util/sql");
 const signUpRouter = require("./router/signup");
 const app = express();
 
@@ -16,8 +19,20 @@ app.use(express.static("assets"));
 // Routers
 app.use("/", signUpRouter);
 
-
-const port = process.env.PORT || 3000;
-app.listen(port, function() {
-	console.log("Listening at http://localhost:" + port);
+app.post("/signup", function(req, res) {
+	User.create({
+		id: req.body.id,
+		firstname: req.body.firstname,
+		lastname: req.body.lastname,
+		email: req.body.email,
+		username: req.body.username,
+		password: req.body.password,
+	});
+});
+sql.sync().then(function() {
+	console.log("Database initialized!");
+	const port = process.env.PORT || 3000;
+	app.listen(port, function() {
+		console.log("Listening at http://localhost:" + port);
+	});
 });

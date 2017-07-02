@@ -1,4 +1,4 @@
-const sql = require("./util/sql");
+const sql = require("../util/sql");
 const Sequelize = require("sequelize");
 
 module.exports = sql.define("user", {
@@ -7,15 +7,15 @@ module.exports = sql.define("user", {
 		primaryKey: true,
 		autoIncrement: true,
 	},
-	first_name: {
+	firstname: {
 		type: Sequelize.STRING,
 		notNull: true,
 	},
-	last_name: {
+	lastname: {
 		type: Sequelize.STRING,
 		notNull: true,
 	},
-	user_name: {
+	username: {
 		type: Sequelize.STRING,
 		notNull: true,
 	},
@@ -23,4 +23,8 @@ module.exports = sql.define("user", {
 		type: Sequelize.STRING,
 		notNull: true,
 	},
+	password: {
+		type:Sequelize.STRING,
+		notNull: true,
+	 },
 });
