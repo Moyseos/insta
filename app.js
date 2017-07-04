@@ -17,7 +17,14 @@ app.use(express.static("assets"));
 
 
 // Routers
-app.use("/", signUpRouter);
+app.get("/signup", function(req, res) {
+	res.render("pages/signup");
+});
+
+app.get("/", function(req, res) {
+	res.render("pages/login");
+});
+
 
 app.post("/signup", function(req, res) {
 	User.create({
