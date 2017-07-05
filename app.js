@@ -4,6 +4,10 @@ const bodyParser = require("body-parser");
 const User = require("./models/users");
 const sql = require("./util/sql");
 const signUpRouter = require("./router/signup");
+const session = require("express-session");
+
+const renderTemplate = require("./util/renderTemplate");
+
 const app = express();
 
 
@@ -27,8 +31,56 @@ app.post("/signup", function(req, res) {
 		email: req.body.email,
 		username: req.body.username,
 		password: req.body.password,
+	})
+	.then(function(user) {
+		req.session.userid = user.id;
+		req.redirect("/home");
+	})
+	.catch(function(err) {
+		renderTemplate(res, "Signup", "signup", {
+			error: "Invalid username or password",
+		});
 	});
 });
+
+app.get("/login", function(req, res) {
+	renderTemplate(res, "Login", "login");
+});
+
+app.post("/login", function(req, res) {
+	User.findOne({
+		where: {
+			username: req.body.username,
+		},
+	})
+	.then(function(user) {
+		if (user) {
+			user.comparePassword(req.body.password).then(function(valid) {
+				if (valid) {
+					req.session.userid = user.get("id");
+					res.redirect("/home");
+				}
+				else {
+					renderTemplate(res, "Login", "login", {
+						error: "Incorrect password",
+					});
+				}
+			});
+		}
+		else {
+			renderTemplate(res, "Login", "login", {
+				error: "Username not found",
+			});
+		}
+	})
+	.catch(function(err) {
+		console.log(err);
+		renderTemplate(res, "Login", "login", {
+			error: "The database exploded, please try again",
+		});
+	});
+});
+
 sql.sync().then(function() {
 	console.log("Database initialized!");
 	const port = process.env.PORT || 3000;
