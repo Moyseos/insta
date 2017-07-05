@@ -5,7 +5,6 @@ const User = require("./models/users");
 const sql = require("./util/sql");
 const signUpRouter = require("./router/signup");
 const session = require("express-session");
-
 const renderTemplate = require("./util/renderTemplate");
 
 const app = express();

@@ -39,10 +39,12 @@ const User = sql.define("user", {
 	password: {
 		type:Sequelize.STRING,
 		notNull: true,
-	}, hooks: {
-		beforeCreate: hashUserPassword,
-		beforeUpdate: hashUserPassword,
 	},
+},{
+		 hooks: {
+			beforeCreate: hashUserPassword,
+			beforeUpdate: hashUserPassword,
+		},
 });
 
 User.prototype.comparePassword = function(pw) {
