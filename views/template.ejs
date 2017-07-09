@@ -8,8 +8,11 @@
 	<body>
 
 		<main>
-		<%- include(page, pageArg);
-		%>
+			<% if (page) { %>
+				<%- include("./pages/" + page, pageArgs); %>
+			<% } else { %>
+						No page variable provided!
+			<% } %>
 		</main>
 
 

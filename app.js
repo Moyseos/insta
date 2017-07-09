@@ -29,18 +29,19 @@ app.get("/signup", function(req, res) {
 	renderTemplate(res, "Signup", "signup");
 });
 app.post("/signup", function(req, res) {
+	console.log(req.body);
 	User.create({
-		id: req.body.id,
-		firstname: req.body.firstname,
-		lastname: req.body.lastname,
+		firstname: req.body.firstName,
+		lastname: req.body.lastName,
 		email: req.body.email,
-		username: req.body.username,
+		username: req.body.userName,
 		password: req.body.password,
 	})
 	.then(function(user) {
 		console.log(user);
-		req.session.User.id = User.id;
-		req.redirect("/");
+		// req.session.userid = user.get("id");
+		console.log("User is logedin/ session needs to be implimented");
+		res.redirect("/");
 	})
 	.catch(function(err) {
 		console.log(err);
@@ -65,7 +66,8 @@ app.post("/login", function(req, res) {
 		if (user) {
 			user.comparePassword(req.body.password).then(function(valid) {
 				if (valid) {
-					req.session.userid = user.get("id");
+					// req.session.userid = user.get("id");
+					console.log("User is logedin/ session needs to be implimented");
 					res.redirect("/");
 				}
 				else {
