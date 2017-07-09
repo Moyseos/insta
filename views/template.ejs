@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title> <%= title %></title>
+		<title> insta </title>
 		<link rel="stylesheet" type="text/css" href="./css/style.css"/>
 	</head>
 
 	<body>
-		<div class="template">
-			<% if (page) { %>
-				<%- include("./pages/" + page, pageArgs); %>
-			<% } else { %>
-				No page variable provided!
-			<% } %>
-		</div>
+
+		<main>
+		<%- include(page, pageArg);
+		%>
+		</main>
 
 
 	</body>
