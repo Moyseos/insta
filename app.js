@@ -20,8 +20,14 @@ app.use(express.static("assets"));
 
 
 // Routers
-app.use("/", signUpRouter);
+// app.use("/", signUpRouter);
+app.get("/", function(req, res) {
+	renderTemplate(res, "template");
+});
 
+app.get("/signup", function(req, res) {
+	renderTemplate(res, "Signup", "signup");
+});
 app.post("/signup", function(req, res) {
 	User.create({
 		id: req.body.id,
@@ -32,10 +38,12 @@ app.post("/signup", function(req, res) {
 		password: req.body.password,
 	})
 	.then(function(user) {
-		req.session.userid = user.id;
-		req.redirect("/home");
+		console.log(user);
+		req.session.User.id = User.id;
+		req.redirect("/");
 	})
 	.catch(function(err) {
+		console.log(err);
 		renderTemplate(res, "Signup", "signup", {
 			error: "Invalid username or password",
 		});
@@ -49,6 +57,7 @@ app.get("/login", function(req, res) {
 app.post("/login", function(req, res) {
 	User.findOne({
 		where: {
+
 			username: req.body.username,
 		},
 	})
@@ -57,7 +66,7 @@ app.post("/login", function(req, res) {
 			user.comparePassword(req.body.password).then(function(valid) {
 				if (valid) {
 					req.session.userid = user.get("id");
-					res.redirect("/home");
+					res.redirect("/");
 				}
 				else {
 					renderTemplate(res, "Login", "login", {
