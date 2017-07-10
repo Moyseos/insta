@@ -112,6 +112,12 @@ app.get("/logout", function(req, res) {
 	res.redirect("/");
 });
 
+
+app.get("/profile", function(req, res) {
+	renderTemplate(res, "Profile", "profile");
+});
+
+
 console.log("Database initialized!");
 const port = process.env.PORT || 3000;
 app.listen(port, function() {
