@@ -1,4 +1,9 @@
 /* signup page */
+
+body {
+	width: 100%;
+
+}
 .signUp {
 	position: absolute;
 	width: 400px;

@@ -1,13 +1,20 @@
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const connectSessionSequelize = require("connect-session-sequelize");
+const SessionStore = connectSessionSequelize(session.Store);
+const deserializeUserMW = require ("./middleware/deserializeUser");
+// const requireLoggedOut = require("../middleware/requireLoggedOut");
+
+
 const User = require("./models/users");
 const sql = require("./util/sql");
-const signUpRouter = require("./router/signup");
-const session = require("express-session");
 const renderTemplate = require("./util/renderTemplate");
 
 const app = express();
+const cookieSecret = process.env.COOKIE_SECRET || "dev";
 
 
 // Handles post request
@@ -17,19 +24,22 @@ app.use(bodyParser.json());
 // Render views using EJS
 app.set("view engine", "ejs");
 app.use(express.static("assets"));
-
+app.use(cookieParser(cookieSecret));
+app.use(session({
+	secret: cookieSecret,
+	store: new SessionStore({ db: sql }),
+}));
+app.use(deserializeUserMW);
+// app.use(requireLoggedOut);
 
 // Routers
-// app.use("/", signUpRouter);
-app.get("/", function(req, res) {
-	renderTemplate(res, "template");
-});
+
 
 app.get("/signup", function(req, res) {
 	renderTemplate(res, "Signup", "signup");
 });
+
 app.post("/signup", function(req, res) {
-	console.log(req.body);
 	User.create({
 		firstname: req.body.firstName,
 		lastname: req.body.lastName,
@@ -38,27 +48,24 @@ app.post("/signup", function(req, res) {
 		password: req.body.password,
 	})
 	.then(function(user) {
-		console.log(user);
-		// req.session.userid = user.get("id");
-		console.log("User is logedin/ session needs to be implimented");
+		req.session.userid = user.id;
 		res.redirect("/");
 	})
 	.catch(function(err) {
-		console.log(err);
 		renderTemplate(res, "Signup", "signup", {
 			error: "Invalid username or password",
 		});
 	});
 });
 
-app.get("/login", function(req, res) {
+
+app.get("/", function(req, res) {
 	renderTemplate(res, "Login", "login");
 });
 
-app.post("/login", function(req, res) {
+app.post("/", function(req, res) {
 	User.findOne({
 		where: {
-
 			username: req.body.username,
 		},
 	})
@@ -66,35 +73,47 @@ app.post("/login", function(req, res) {
 		if (user) {
 			user.comparePassword(req.body.password).then(function(valid) {
 				if (valid) {
-					// req.session.userid = user.get("id");
-					console.log("User is logedin/ session needs to be implimented");
-					res.redirect("/");
+					req.session.userid = user.get("id");
+					res.redirect("/home");
 				}
 				else {
-					renderTemplate(res, "Login", "login", {
+					renderTemplate(req, res, "Login", "login", {
 						error: "Incorrect password",
 					});
 				}
 			});
 		}
 		else {
-			renderTemplate(res, "Login", "login", {
+			renderTemplate(req, res, "Login", "login", {
 				error: "Username not found",
 			});
 		}
 	})
 	.catch(function(err) {
 		console.log(err);
-		renderTemplate(res, "Login", "login", {
+		renderTemplate(req, res, "Login", "login", {
 			error: "The database exploded, please try again",
 		});
 	});
 });
 
-sql.sync().then(function() {
-	console.log("Database initialized!");
-	const port = process.env.PORT || 3000;
-	app.listen(port, function() {
-		console.log("Listening at http://localhost:" + port);
+
+app.get("/home", function(req, res) {
+	renderTemplate(res, "Home", "home", {
+		username: req.session.user,
+});
 	});
+
+app.get("/logout", function(req, res) {
+	req.session.userid = null;
+	req.user = null;
+
+	console.log(req.session);
+	res.redirect("/");
+});
+
+console.log("Database initialized!");
+const port = process.env.PORT || 3000;
+app.listen(port, function() {
+	console.log("Listening at http://localhost:" + port);
 });
