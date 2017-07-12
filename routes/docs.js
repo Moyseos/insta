@@ -5,12 +5,10 @@ const User = require("../models/user");
 const File = require("../models/file");
 const renderTemplate = require("../util/renderTemplate");
 const requireLoggedIn = require("../middleware/requireLoggedIn");
-const docsRoutes = require("./routes/docs");
 
 const uploader = multer({ dest: "uploads/" });
 const router = express.Router();
 router.use(requireLoggedIn);
-router.use("/docs", docsRoutes);
 
 // Render all of a user's documents
 router.get("/", function(req, res) {

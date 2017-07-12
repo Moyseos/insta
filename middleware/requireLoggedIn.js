@@ -3,7 +3,7 @@ function requireLoggedIn(req, res, next) {
 		next();
 	}
 	else {
-		res.redirect("/home");
+		res.redirect("/");
 	}
 }
 
