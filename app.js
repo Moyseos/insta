@@ -104,8 +104,8 @@ app.post("/", function(req, res) {
 app.get("/home",requireLoggedIn, function(req, res) {
 	renderTemplate(res, "Home", "home", {
 		username: req.user.get("username"),
-});
 	});
+});
 
 app.get("/logout", function(req, res) {
 	req.session.userid = null;
@@ -125,10 +125,12 @@ app.all("*", function(req, res) {
 	renderTemplate(req, res, "Not Found", "404");
 });
 
+
 sql.sync().then(function() {
-console.log("Database initialized!");
-const port = process.env.PORT || 3000;
-app.listen(port, function() {
-	console.log("Listening at http://localhost:" + port);
+	console.log("Database initialized!");
+	const port = process.env.PORT || 3000;
+	app.listen(port, function() {
+		console.log("Listening at http://localhost:" + port);
+
 	});
 });
