@@ -54,7 +54,7 @@ router.post("/upload", uploader.single("file"), function(req, res) {
 });
 
 // Render an individual document
-router.get("/:fileId", function(req, res) {
+router.get("/photo/:fileId", function(req, res) {
 	File.findById(req.params.fileId).then(function(file) {
 		if (file) {
 			renderTemplate(req, res, file.get("name"), "document", {

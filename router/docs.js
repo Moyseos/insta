@@ -12,6 +12,7 @@ const router = express.Router();
 router.use(requireLoggedIn);
 
 
+
 // Render all of a user's documents
 router.get("/home", function(req, res) {
 	let message = "";

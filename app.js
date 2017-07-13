@@ -102,11 +102,11 @@ app.post("/", function(req, res) {
 });
 
 
-app.get("/home",requireLoggedIn, function(req, res) {
-	renderTemplate(res, "Home", "home", {
-		username: req.user.get("username"),
-	});
-});
+// app.get("/home",requireLoggedIn, function(req, res) {
+// 	renderTemplate(res, "Home", "home", {
+// 		username: req.user.get("username"),
+// 	});
+// });
 
 app.get("/logout", function(req, res) {
 	req.session.userid = null;
@@ -121,10 +121,10 @@ app.get("/profile", function(req, res) {
 	renderTemplate(res, "Profile", "profile");
 });
 
-app.all("*", function(req, res) {
-	res.status(404);
-	renderTemplate(req, res, "Not Found", "404");
-});
+// app.all("*", function(req, res) {
+// 	res.status(404);
+// 	renderTemplate(req, res, "Not Found", "404");
+// });
 
 app.use("/", docsRoutes);
 sql.sync().then(function() {
