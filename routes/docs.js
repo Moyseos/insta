@@ -18,10 +18,10 @@ router.get("/", function(req, res) {
 		message = "File uploaded succesfully!";
 	}
 
-	req.user.getFiles().then(function(docs) {
+	req.user.getFiles().then(function(pics) {
 		renderTemplate(req, res, "My Documents", "docs", {
 			username: req.user.get("username"),
-			docs: docs,
+			pics: pics,
 			message: message,
 		});
 	});
@@ -54,7 +54,7 @@ router.post("/upload", uploader.single("file"), function(req, res) {
 });
 
 // Render an individual document
-router.get("/doc/:fileId", function(req, res) {
+router.get("/:fileId", function(req, res) {
 	File.findById(req.params.fileId).then(function(file) {
 		if (file) {
 			renderTemplate(req, res, file.get("name"), "document", {
@@ -72,20 +72,5 @@ router.get("/doc/:fileId", function(req, res) {
 	});
 });
 
-// Download a document, if it exists
-router.get("/download/:fileId", function(req, res) {
-	File.findById(req.params.fileId).then(function(file) {
-		if (file) {
-			res.download("uploads/" + file.get("id"), file.get("originalName"));
-		}
-		else {
-			res.status(404).send("No file found");
-		}
-	})
-	.catch(function(err) {
-		console.error(err);
-		res.status(500).send("Something went wrong");
-	});
-});
 
 module.exports = router;

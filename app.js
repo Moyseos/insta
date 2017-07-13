@@ -22,7 +22,7 @@ const cookieSecret = process.env.COOKIE_SECRET || "dev";
 // Handles post request
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use("/docs", docsRoutes);
+
 // Render views using EJS
 app.set("view engine", "ejs");
 app.use(express.static("assets"));
@@ -32,7 +32,7 @@ app.use(session({
 	store: new SessionStore({ db: sql }),
 }));
 app.use(deserializeUserMW);
-app.use("/profile", docsRoutes);
+
 // app.use(requireLoggedOut);
 // Routers
 
@@ -126,7 +126,7 @@ app.all("*", function(req, res) {
 	renderTemplate(req, res, "Not Found", "404");
 });
 
-
+app.use("/", docsRoutes);
 sql.sync().then(function() {
 	console.log("Database initialized!");
 	const port = process.env.PORT || 3000;

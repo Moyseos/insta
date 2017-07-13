@@ -55,39 +55,6 @@ router.post("/profile", uploader.single("file"), function(req, res) {
 	});
 });
 
-// Render an individual document
-// router.get("/doc/:fileId", function(req, res) {
-// 	File.findById(req.params.fileId).then(function(file) {
-// 		if (file) {
-// 			renderTemplate(req, res, file.get("name"), "document", {
-// 				file: file,
-// 			});
-// 		}
-// 		else {
-// 			res.status(404);
-// 			renderTemplate(req, res, "Not Found", "404");
-// 		}
-// 	})
-// 	.catch(function(err) {
-// 		console.error("Error while fetching file " + req.params.fileId, err);
-// 		res.status(500).send("Something went wrong!");
-// 	});
-// });
 
-// Download a document, if it exists
-// router.get("/download/:fileId", function(req, res) {
-// 	File.findById(req.params.fileId).then(function(file) {
-// 		if (file) {
-// 			res.download("uploads/" + file.get("id"), file.get("originalName"));
-// 		}
-// 		else {
-// 			res.status(404).send("No file found");
-// 		}
-// 	})
-// 	.catch(function(err) {
-// 		console.error(err);
-// 		res.status(500).send("Something went wrong");
-// 	});
-// });
 
 module.exports = router;
