@@ -3,6 +3,9 @@
 <a href="/profile">Profile</a>
 	</div>
 
-<div class= "display">
-      <div class= "display-song"></div>
-			</div>
+	<% for (let i = 0; i < pics.length; i++) { %>
+			<a href = "/pics/pic/<%- pics[i].get('id') %>">
+				<img src ="<%- pics[i].getPreciewSrc() %>"/>
+				<%- pics[i].get("originalName") %>
+
+		<% } %>

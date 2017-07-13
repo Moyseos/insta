@@ -32,6 +32,7 @@ app.use(session({
 	store: new SessionStore({ db: sql }),
 }));
 app.use(deserializeUserMW);
+app.use("/profile", docsRoutes);
 // app.use(requireLoggedOut);
 // Routers
 
