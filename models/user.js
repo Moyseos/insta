@@ -54,6 +54,8 @@ const User = sql.define("user", {
 		},
 });
 
+User.hasMany(File);
+
 User.prototype.upload = function(file) {
 	return this.createFile({
 		id: file.filename,
