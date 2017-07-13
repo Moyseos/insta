@@ -5,7 +5,11 @@
 
 	<% for (let i = 0; i < pics.length; i++) { %>
 			<a href = "/pics/pic/<%- pics[i].get('id') %>">
-				<img src ="<%- pics[i].getPreciewSrc() %>"/>
+				<img src ="<%- pics[i].getPreviewSrc() %>"/>
 				<%- pics[i].get("originalName") %>
 
 		<% } %>
+
+<div class = "log">
+	<a href="/logout">logout</a>
+</div>

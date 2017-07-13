@@ -8,10 +8,10 @@ const requireLoggedIn = require("../middleware/requireLoggedIn");
 
 const uploader = multer({ dest: "uploads/" });
 const router = express.Router();
-router.use(requireLoggedIn);
+
 
 // Render all of a user's documents
-router.get("/home", function(req, res) {
+router.get("/home",requireLoggedIn, function(req, res) {
 	let message = "";
 
 	if (req.query.success) {
@@ -19,7 +19,7 @@ router.get("/home", function(req, res) {
 	}
 
 	req.user.getFiles().then(function(pics) {
-		renderTemplate(req, res, "My Documents", "docs", {
+		renderTemplate(req, res, "My Documents", "home", {
 			username: req.user.get("username"),
 			pics: pics,
 			message: message,
@@ -28,22 +28,22 @@ router.get("/home", function(req, res) {
 });
 
 // Render an upload form that POSTs to /docs/upload
-router.get("/upload", function(req, res) {
-	renderTemplate(req, res, "Upload a File", "upload");
+router.get("/profile", requireLoggedIn, function(req, res) {
+	renderTemplate(req, res, "Upload a File", "profile");
 });
 
 // Upload the form at GET /docs/upload
-router.post("/upload", uploader.single("file"), function(req, res) {
+router.post("/home", requireLoggedIn, uploader.single("file"), function(req, res) {
 	// Make sure they sent a file
 	if (!req.file) {
-		return renderTemplate(req, res, "Upload a File", "upload", {
+		return renderTemplate(req, res, "Upload a File", "home", {
 			error: "You must choose a file to upload",
 		});
 	}
 
 	// Otherwise, try an upload
 	req.user.upload(req.file).then(function() {
-		res.redirect("/docs?success=1");
+		res.redirect("/home?success=1");
 	})
 	.catch(function(err) {
 		console.error("Something went wrong with upload", err);
@@ -54,10 +54,10 @@ router.post("/upload", uploader.single("file"), function(req, res) {
 });
 
 // Render an individual document
-router.get("/photo/:fileId", function(req, res) {
+router.get("/photo/:fileId",requireLoggedIn, function(req, res) {
 	File.findById(req.params.fileId).then(function(file) {
 		if (file) {
-			renderTemplate(req, res, file.get("name"), "document", {
+			renderTemplate(req, res, file.get("name"), "home", {
 				file: file,
 			});
 		}

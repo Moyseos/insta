@@ -13,7 +13,7 @@ const sql = require("./util/sql");
 const renderTemplate = require("./util/renderTemplate");
 
 const requireLoggedIn = require("./middleware/requireLoggedIn");
-
+const requireLoggedOut = require("./middleware/requireLoggedOut");
 
 const app = express();
 const cookieSecret = process.env.COOKIE_SECRET || "dev";
@@ -34,7 +34,7 @@ app.use(session({
 app.use(deserializeUserMW);
 
 // app.use(requireLoggedOut);
-// Routers
+
 
 
 app.get("/signup", function(req, res) {
@@ -63,7 +63,7 @@ app.post("/signup", function(req, res) {
 
 
 app.get("/", function(req, res) {
-	renderTemplate(res, "Login", "login");
+	renderTemplate(req, res, "Login", "login");
 });
 
 app.post("/", function(req, res) {
@@ -102,12 +102,6 @@ app.post("/", function(req, res) {
 });
 
 
-// app.get("/home",requireLoggedIn, function(req, res) {
-// 	renderTemplate(res, "Home", "home", {
-// 		username: req.user.get("username"),
-// 	});
-// });
-
 app.get("/logout", function(req, res) {
 	req.session.userid = null;
 	req.user = null;
@@ -117,16 +111,9 @@ app.get("/logout", function(req, res) {
 });
 
 
-app.get("/profile", function(req, res) {
-	renderTemplate(res, "Profile", "profile");
-});
-
-// app.all("*", function(req, res) {
-// 	res.status(404);
-// 	renderTemplate(req, res, "Not Found", "404");
-// });
 
 app.use("/", docsRoutes);
+
 sql.sync().then(function() {
 	console.log("Database initialized!");
 	const port = process.env.PORT || 3000;
