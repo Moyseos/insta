@@ -1,15 +1,23 @@
-<div class = "main">
-	<h1>Welcome to Photopop <%= username %></h1>
-<a href="/profile">Profile</a>
-	</div>
+<div class="home-page">
 
-	<% for (let i = 0; i < pics.length; i++) { %>
-			<a href = "/pics/pic/<%- pics[i].get('id') %>">
-				<img src ="<%- pics[i].getPreviewSrc() %>"/>
-				<%- pics[i].get("originalName") %>
+		<div class="header-container-nav">
+					<h1 class="header-container-nav-username"><a  href="/home"><%= username %></a></h1>
+					<button class="header-container-nav-logo" href="/home">logo</button>
+					<a href="/profile">Profile</a>
+					<a href="/logout">Logout</a>
+		</div>
 
-		<% } %>
+			<h1 class="home-page-heading"> PHOTOPOP</h1>
 
-<div class = "log">
-	<a href="/logout">logout</a>
+<div class="homepage-images">
+		<% for (let i = 0; i < pics.length; i++) { %>
+				<a href = "/pics/pic/<%- pics[i].get('id') %>">
+					<img class="uploaded-images" src ="<%- pics[i].getPreviewSrc() %>"/>
+					<%- pics[i].get("originalName") %>
+
+			<% } %>
+
+</div>
+
+
 </div>
