@@ -10,14 +10,10 @@
 				<img src ="<%- pics[i].getPreviewSrc() %>"/>
 				<%- pics[i].get("originalName") %>
 			</a>
-<!-- DISPLAY COMMENT -->
-		<% for ( let i = 0; i < comment.length; i++) { %>
-			<%- messages[]
-		}
 
 
 				<form method="post" action="photo/<%=pics[i].id%>/comment">
-					<textarea name="comment" type= "text" >Enter comments here...</textarea>
+					<textarea name="comment" type= "text" placeholder="Enter comments here..."></textarea>
 					<button>Submit</button>
 				</form>
 </div>

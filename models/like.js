@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const sql = require("../util/sql");
 
 
-const Like = sql.define("comment", {
+const Like = sql.define("like", {
 	id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true,

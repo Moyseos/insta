@@ -26,7 +26,7 @@ const File = sql.define("file", {
 File.hasMany(Comments);
 File.hasMany(Likes);
 
-File.hasMany(Comments);
+
 
 File.prototype.getThumbnailSrc = function(file) {
 	if (fs.existsSync("assets/thumbnails/" + this.get("id") + ".jpg")) {
