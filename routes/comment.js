@@ -16,14 +16,9 @@ router.post("/photo/:fileId/comment",requireLoggedIn, function(req, res) {
 	Comments.create({
 		comment: req.body.comment,
 		fileId: req.params.fileId,
-	}).then (function(comment, pics) {
+	}).then (function(comment) {
 		if (comment) {
-			res.send('lol');
-			renderTemplate(req, res, "home", {
-				username: req.user.get("username"),
-				pics: pics,
-				comment: comment,
-			});
+			res.redirect("/home");
 		}
 		else {
 			renderTemplate(req, res, "home", {

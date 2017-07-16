@@ -8,16 +8,14 @@
 		<div class= pic>
 			<a href = "/pics/pic/<%- pics[i].get('id') %>">
 				<img src ="<%- pics[i].getPreviewSrc() %>"/>
-				<%- pics[i].get("originalName") %>
 			</a>
-<!-- DISPLAY COMMENT -->
-		<% for ( let i = 0; i < comment.length; i++) { %>
-			<%- messages[]
-		}
 
+			<% for (let j = 0; j < pics[i].comments.length; j++) { %>
+			<%- pics[i].comments[j].comment %>
+			<% } %>
 
 				<form method="post" action="photo/<%=pics[i].id%>/comment">
-					<textarea name="comment" type= "text" >Enter comments here...</textarea>
+					<textarea name="comment" type= "text" placeholder="Enter comments here..."></textarea>
 					<button>Submit</button>
 				</form>
 </div>
