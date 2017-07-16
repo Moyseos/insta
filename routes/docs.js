@@ -40,7 +40,6 @@ router.post("/home", requireLoggedIn, uploader.single("file"), function(req, res
 			error: "You must choose a file to upload",
 		});
 	}
-
 	// Otherwise, try an upload
 	req.user.upload(req.file).then(function() {
 		res.redirect("/home?success=1");
@@ -71,6 +70,8 @@ router.get("/photo/:fileId",requireLoggedIn, function(req, res) {
 		res.status(500).send("Something went wrong!");
 	});
 });
+
+
 
 
 module.exports = router;
