@@ -3,12 +3,27 @@
 <a href="/profile">Profile</a>
 	</div>
 
+
 	<% for (let i = 0; i < pics.length; i++) { %>
+		<div class= pic>
 			<a href = "/pics/pic/<%- pics[i].get('id') %>">
 				<img src ="<%- pics[i].getPreviewSrc() %>"/>
 				<%- pics[i].get("originalName") %>
+			</a>
+<!-- DISPLAY COMMENT -->
 
-		<% } %>
+				<form method="post" action="photo/<%=pics[i].id%>/comment">
+					<textarea name="comment" type= "text" >Enter comments here...</textarea>
+					<button>Submit</button>
+				</form>
+</div>
+<% } %>
+
+<!--Comment error  -->
+<% if (typeof error !== "undefined") { %>
+		<div class="error"><%= error %></div>
+	<% } %>
+
 
 <div class = "log">
 	<a href="/logout">logout</a>

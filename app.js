@@ -7,6 +7,7 @@ const connectSessionSequelize = require("connect-session-sequelize");
 const SessionStore = connectSessionSequelize(session.Store);
 const deserializeUserMW = require ("./middleware/deserializeUser");
 const docsRoutes = require("./routes/docs");
+const commentRoutes = require("./routes/comment");
 
 const User = require("./models/user");
 const sql = require("./util/sql");
@@ -113,6 +114,7 @@ app.get("/logout", function(req, res) {
 
 
 app.use("/", docsRoutes);
+app.use("/", commentRoutes);
 
 sql.sync().then(function() {
 	console.log("Database initialized!");

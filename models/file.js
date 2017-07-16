@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const sql = require("../util/sql");
 const fs = require("fs");
+const Comments = require("../models/comments");
 
 const File = sql.define("file", {
 	id: {
@@ -20,6 +21,8 @@ const File = sql.define("file", {
 		notNull: true,
 	},
 });
+
+File.hasMany(Comments);
 
 File.prototype.getThumbnailSrc = function(file) {
 	if (fs.existsSync("assets/thumbnails/" + this.get("id") + ".jpg")) {
