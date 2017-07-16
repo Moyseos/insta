@@ -19,6 +19,9 @@ input {
     box-sizing: border-box;
 }
 
+a {
+	text-decoration: none;
+}
 .signUp-form-button {
     background-color: #f4e842;
 		font-size: 20px;
@@ -134,7 +137,6 @@ button {
 }
 
 .upload-button {
-	background-image: url("upload.png");
 }
 
 
@@ -162,7 +164,7 @@ color: #fff723;
 	border-color: #000;
 }
 
-.header-container-nav a {
+.header-container-nav-paths {
 	font-family: 'Raleway', sans-serif;
 	color: #000;
 	text-decoration: none;
@@ -179,17 +181,22 @@ color: #fff723;
 	color: #fff959;
 }
 
-.header-container-nav-username {
+.header-container-nav-username a {
 	font-family: 'Raleway', sans-serif;
 	font-weight: bold;
 	text-decoration: none;
 	float: right;
 	font-size: 20px;
 	color: #000;
+	display: block;
+	text-align: center;
+	padding: 18px 16px;
 }
 
 .header-container-nav-logo {
-	background-image: url("/images/cam.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-image: url("/images/camera.png");
 	float: right;
 	}
 
