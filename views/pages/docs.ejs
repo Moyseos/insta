@@ -1,0 +1,48 @@
+<h1><%= username %>'s Documents</h1>
+<div class="docs">
+	<% if (message) { %>
+		<p class="docs-message">
+			<%- message %>
+		</p>
+	<% } %>
+
+	<% if (docs && docs.length) { %>
+		<table>
+			<thead>
+				<td>File (link)</td>
+				<td>Type</td>
+				<td>Size</td>
+				<td>Delete</td>
+			</thead>
+			<tbody>
+				<% for (let i = 0; i < docs.length; i++) { %>
+					<tr class="doc" data-fileId="<%- docs[i].get('id') %>">
+						<td>
+							<a href="/docs/doc/<%- docs[i].get('id') %>">
+								<img src="<%- docs[i].getThumbnailSrc() %>"/>
+								<%- docs[i].get("originalName") %>
+							</a>
+						</td>
+						<td>
+							<%- docs[i].get("mimeType") %>
+						</td>
+						<td>
+							<%- docs[i].get("size") %> bytes
+						</td>
+						<td>
+							<button class="doc-delete" data-fileId="<%- docs[i].get('id') %>">
+								X
+							</button>
+						</td>
+					</tr>
+				<% } %>
+			</tbody>
+		</table>
+		<a href="/docs/upload" class="docs-upload">Upload another doc</a>
+	<% } else { %>
+		<p class="docs-none">You don't have any docs yet...<p>
+		<a href="/docs/upload" class="docs-upload">Why not upload some?</a>
+	<% } %>
+</div>
+
+<script src="/js/docs.js"></script>

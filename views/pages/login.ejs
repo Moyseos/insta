@@ -8,20 +8,20 @@
 		<!--Log in  -->
 
  		<div class= "container">
-			<p>Sing up to see photos and videos from your friends</p>
-			<h1>Log In</h1>
+			<p class="login-container-p">Sing up to see photos and videos from your friends</p>
+			<h1 class="login-container-h">Log In</h1>
 			<div class= "singin">
 
-				<form class = "login-input" method="post" action = "/">
+				<form class="login-input" method="post" action="/">
 					<% if (typeof error !== "undefined") { %>
 		<div class="error"><%= error %></div>
 	<% } %>
-					<input type ="text" name="username" placeholder="username"/><br/>
-					<input type ="password" name= "password" placeholder="password"/><br/>
-					<button>Submit</button>
+					<input type="text" name="username" placeholder="username"/><br/>
+					<input type="password" name="password" placeholder="password"/><br/>
+					<button class="login-btns">Submit</button>
 				</form>
 			</div>
-			<a href = "/signup">Sign Up</a>
+			<button class="login-btns" href="/signup">Sign Up</button>
 		</div>
 
 	</div>
