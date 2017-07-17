@@ -1,7 +1,7 @@
 node_modules/
 *.log
 .env
-assets/thumbnails
 assets/previews
+assets/thumbnails
 assets/files
 uploads

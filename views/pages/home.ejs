@@ -1,5 +1,6 @@
 <div class="home-page">
 
+
 		<div class="header-container-nav">
 					<h1 class="header-container-nav-username"><a  href="/home"><%= username %></a></h1>
 					<a class="header-container-nav-paths" href="/profile">Profile</a>
@@ -9,14 +10,23 @@
 			<h1 class="home-page-heading"> PHOTOPOP</h1>
 
 <div class="homepage-images">
-		<% for (let i = 0; i < pics.length; i++) { %>
-				<a href = "/pics/pic/<%- pics[i].get('id') %>">
-					<img class="uploaded-images" src ="<%- pics[i].getPreviewSrc() %>"/>
-					<!-- <%- pics[i].get("originalName") %> -->
-
-			<% } %>
-
+	<% for (let i = 0; i < pics.length; i++) { %>
+    <div class= pic>
+			<a href = "/pics/pic/<%- pics[i].get('id') %>">
+				<img class="uploaded-images" src ="<%- pics[i].getPreviewSrc() %>"/>
+      </a>
+   <% for (let j = 0; j < pics[i].comments.length; j++) { %>
+		 <%- pics[i].comments[j].comment %>
+	 <% } %>
+    <form method="post" action="photo/<%=pics[i].id%>/comment">
+				<textarea name="comment" type= "text" placeholder="Enter comments here..."></textarea>
+				<button>Submit</button>
+		</form>
+   </div>
+    <% } %>
 </div>
-
-
+<!--Comment error  -->
+<% if (typeof error !== "undefined") { %>
+		<div class="error"><%= error %></div>
+	<% } %>
 </div>

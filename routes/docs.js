@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 
+const Comments = require("../models/comments");
 const User = require("../models/user");
 const File = require("../models/file");
 const renderTemplate = require("../util/renderTemplate");
@@ -18,14 +19,16 @@ router.get("/home",requireLoggedIn, function(req, res) {
 		message = "File uploaded succesfully!";
 	}
 
-	req.user.getFiles().then(function(pics) {
+	req.user.getFiles({ include: [Comments] }).then(function(pics) {
 		renderTemplate(req, res, "My Documents", "home", {
 			username: req.user.get("username"),
 			pics: pics,
-			message: message,
+
 		});
 	});
 });
+
+
 
 // Render an upload form that POSTs to /docs/upload
 router.get("/profile", requireLoggedIn, function(req, res) {
@@ -40,7 +43,6 @@ router.post("/home", requireLoggedIn, uploader.single("file"), function(req, res
 			error: "You must choose a file to upload",
 		});
 	}
-
 	// Otherwise, try an upload
 	req.user.upload(req.file).then(function() {
 		res.redirect("/home?success=1");
@@ -71,6 +73,8 @@ router.get("/photo/:fileId",requireLoggedIn, function(req, res) {
 		res.status(500).send("Something went wrong!");
 	});
 });
+
+
 
 
 module.exports = router;

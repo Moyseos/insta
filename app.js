@@ -7,6 +7,7 @@ const connectSessionSequelize = require("connect-session-sequelize");
 const SessionStore = connectSessionSequelize(session.Store);
 const deserializeUserMW = require ("./middleware/deserializeUser");
 const docsRoutes = require("./routes/docs");
+const commentRoutes = require("./routes/comment");
 
 const User = require("./models/user");
 const sql = require("./util/sql");
@@ -95,7 +96,7 @@ app.post("/", function(req, res) {
 	})
 	.catch(function(err) {
 		console.log(err);
-		renderTemplate(res, "Login", "login", {
+		renderTemplate(req, res, "Login", "login", {
 			error: "The database exploded, please try again",
 		});
 	});
@@ -113,6 +114,7 @@ app.get("/logout", function(req, res) {
 
 
 app.use("/", docsRoutes);
+app.use("/", commentRoutes);
 
 sql.sync().then(function() {
 	console.log("Database initialized!");
