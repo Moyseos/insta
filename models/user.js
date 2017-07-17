@@ -4,6 +4,7 @@ const fs = require("fs-extra");
 const path = require("path");
 const sql = require("../util/sql");
 const File = require("./file");
+const Comments = require("./comments");
 const imagePath = "assets/previews/";
 const imageTum = "assets/thumbnails/";
 const Jimp = require("jimp");
@@ -55,6 +56,10 @@ const User = sql.define("user", {
 });
 
 User.hasMany(File);
+
+// Comments.prototype. upload = function (comments) {
+//
+// }
 
 User.prototype.upload = function(file) {
 	return this.createFile({

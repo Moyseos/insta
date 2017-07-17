@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 const sql = require("../util/sql");
 const fs = require("fs");
+const Likes =  require("./like");
+
 const Comments = require("../models/comments");
 
 const File = sql.define("file", {
@@ -21,8 +23,10 @@ const File = sql.define("file", {
 		notNull: true,
 	},
 });
-
 File.hasMany(Comments);
+File.hasMany(Likes);
+
+
 
 
 

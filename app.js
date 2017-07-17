@@ -96,7 +96,7 @@ app.post("/", function(req, res) {
 	})
 	.catch(function(err) {
 		console.log(err);
-		renderTemplate(res, "Login", "login", {
+		renderTemplate(req, res, "Login", "login", {
 			error: "The database exploded, please try again",
 		});
 	});

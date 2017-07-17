@@ -18,7 +18,11 @@ router.post("/photo/:fileId/comment",requireLoggedIn, function(req, res) {
 		fileId: req.params.fileId,
 	}).then (function(comment) {
 		if (comment) {
-			res.redirect("/home");
+			renderTemplate(req, res, "home", {
+				username: req.user.get("username"),
+				pics: pics,
+				comment: comment,
+			});
 		}
 		else {
 			renderTemplate(req, res, "home", {
