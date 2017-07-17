@@ -28,6 +28,8 @@ File.hasMany(Likes);
 
 
 
+
+
 File.prototype.getThumbnailSrc = function(file) {
 	if (fs.existsSync("assets/thumbnails/" + this.get("id") + ".jpg")) {
 		return "/thumbnails/" + this.get("id") + ".jpg";
@@ -46,6 +48,10 @@ File.prototype.getPreviewSrc = function(file) {
 	// Otherwise return null, to display a "no preview" message
 		return null;
 	}
+};
+
+File.getAllPhotosAndComments = function() {
+	
 };
 
 module.exports = File;
