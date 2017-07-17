@@ -41,7 +41,7 @@ router.post("/home", requireLoggedIn, uploader.single("file"), function(req, res
 		});
 	}
 	// Otherwise, try an upload
-	req.user.upload(req.file).then(function() {
+	req.user.upload(req.file, req).then(function() {
 		res.redirect("/home?success=1");
 	})
 	.catch(function(err) {

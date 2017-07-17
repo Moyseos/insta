@@ -61,12 +61,13 @@ User.hasMany(File);
 //
 // }
 
-User.prototype.upload = function(file) {
+User.prototype.upload = function(file, req) {
 	return this.createFile({
 		id: file.filename,
 		size: file.size,
 		originalName: file.originalname,
 		mimeType: file.mimetype,
+		description: req.body.description,
 	})
 	.then(function() {
 		const ext = path.extname(file.originalname);

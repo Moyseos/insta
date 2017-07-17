@@ -116,7 +116,7 @@ app.get("/logout", function(req, res) {
 app.use("/", docsRoutes);
 app.use("/", commentRoutes);
 
-sql.sync().then(function() {
+sql.sync({ force:true }).then(function() {
 	console.log("Database initialized!");
 	const port = process.env.PORT || 3000;
 	app.listen(port, function() {
