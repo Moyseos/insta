@@ -118,4 +118,4 @@ I'm using the following apps for design / functionality inspiration:
 
 ## Github and Heroku links
 
-* [Heroku](https://dashboard.heroku.com/apps/photo-pop-pro)
+* [Heroku](https://photo-pop-pro.herokuapp.com/)
