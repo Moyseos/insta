@@ -23,7 +23,7 @@ router.get("/home",requireLoggedIn, function(req, res) {
 		renderTemplate(req, res, "My Documents", "home", {
 			username: req.user.get("username"),
 			pics: pics,
-
+			description: req.body.description,
 		});
 	});
 });
@@ -44,7 +44,8 @@ router.post("/home", requireLoggedIn, uploader.single("file"), function(req, res
 		});
 	}
 	// Otherwise, try an upload
-	req.user.upload(req.file).then(function() {
+	req.user.upload(req.file, req).then(function(pics) {
+		// res.redirect("/home" + pics.get("id"));
 		res.redirect("/home?success=1");
 	})
 	.catch(function(err) {
@@ -54,7 +55,6 @@ router.post("/home", requireLoggedIn, uploader.single("file"), function(req, res
 		});
 	});
 });
-
 // Render an individual document
 router.get("/photo/:fileId",requireLoggedIn, function(req, res) {
 	File.findById(req.params.fileId).then(function(file) {

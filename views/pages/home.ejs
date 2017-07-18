@@ -15,6 +15,10 @@
 			<a href = "/pics/pic/<%- pics[i].get('id') %>">
 				<img class="uploaded-images" src ="<%- pics[i].getPreviewSrc() %>"/>
       </a>
+
+			<h4><%- pics[i].get("description") %></h4>
+
+
    <% for (let j = 0; j < pics[i].comments.length; j++) { %>
 		 <%- pics[i].comments[j].comment %>
 	 <% } %>
@@ -22,6 +26,7 @@
 				<textarea name="comment" type= "text" placeholder="Enter comments here..."></textarea>
 				<button>Submit</button>
 		</form>
+
    </div>
     <% } %>
 </div>
