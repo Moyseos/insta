@@ -10,7 +10,6 @@ const router = express.Router();
 
 
 
-
 router.post("/photo/:fileId/comment",requireLoggedIn, function(req, res) {
 	console.log(req.params);
 	Comments.create({
@@ -18,11 +17,7 @@ router.post("/photo/:fileId/comment",requireLoggedIn, function(req, res) {
 		fileId: req.params.fileId,
 	}).then (function(comment) {
 		if (comment) {
-			renderTemplate(req, res, "home", {
-				username: req.user.get("username"),
-				pics: pics,
-				comment: comment,
-			});
+			res.redirect("/home");
 		}
 		else {
 			renderTemplate(req, res, "home", {

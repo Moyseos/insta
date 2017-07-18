@@ -39,7 +39,7 @@ app.use(deserializeUserMW);
 
 
 app.get("/signup", function(req, res) {
-	renderTemplate(res, "Signup", "signup");
+	renderTemplate(req, res, "Signup", "signup");
 });
 
 app.post("/signup", function(req, res) {
