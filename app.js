@@ -39,7 +39,7 @@ app.use(deserializeUserMW);
 
 
 app.get("/signup", function(req, res) {
-	renderTemplate(res, "Signup", "signup");
+	renderTemplate(req, res, "Signup", "signup");
 });
 
 app.post("/signup", function(req, res) {
@@ -89,7 +89,7 @@ app.post("/", function(req, res) {
 			});
 		}
 		else {
-			renderTemplate(res, "Login", "login", {
+			renderTemplate(req, res, "Login", "login", {
 				error: "Username not found",
 			});
 		}
@@ -121,6 +121,5 @@ sql.sync().then(function() {
 	const port = process.env.PORT || 3000;
 	app.listen(port, function() {
 		console.log("Listening at http://localhost:" + port);
-
 	});
 });

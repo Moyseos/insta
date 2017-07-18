@@ -22,6 +22,9 @@ const File = sql.define("file", {
 		type: Sequelize.STRING,
 		notNull: true,
 	},
+	description: {
+		type: Sequelize.STRING(150),
+	},
 });
 File.hasMany(Comments);
 File.hasMany(Likes);
