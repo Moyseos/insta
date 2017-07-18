@@ -56,7 +56,7 @@ app.post("/signup", function(req, res) {
 	})
 	.catch(function(err) {
 		console.log(err);
-		renderTemplate(res, "Signup", "signup", {
+		renderTemplate(req, res, "Signup", "signup", {
 			error: "Invalid username or password",
 		});
 	});
@@ -82,7 +82,7 @@ app.post("/", function(req, res) {
 					res.redirect("/home");
 				}
 				else {
-					renderTemplate(res, "Login", "login", {
+					renderTemplate(req, res, "Login", "login", {
 						error: "Incorrect password",
 					});
 				}

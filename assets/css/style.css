@@ -19,6 +19,9 @@ input {
     box-sizing: border-box;
 }
 
+a {
+	text-decoration: none;
+}
 .signUp-form-button {
     background-color: #f4e842;
 		font-size: 20px;
@@ -58,11 +61,35 @@ input {
     border: 3px solid #73AD21;
 }
 
+
+ /* login page */
+
+ .login-container-p {
+	 text-align: center;
+	 font-size: 22px;
+	 font-style: 'Raleway', sans-serif;
+	 font-weight: bold;
+	 padding: 20px 10px 40px 10px;
+ }
+
+.login-container-h {
+	text-align: center;
+	font-size: 22px;
+	font-style: 'Raleway', sans-serif;
+	font-weight: bold;
+	padding: 20px 10px 40px 10px;
+}
+
 .cover {
 	/*background-color: black;*/
 	background-image: url("/images/profile-picture-collage.png");
 	width: 100%;
 	height: 700px;
+}
+
+.login-input input {
+	text-align: center;
+	font-size: 15px;
 }
 
 .login-input input,
@@ -72,6 +99,14 @@ button {
 	height: 35px;
 	display: block;
 	margin: 0 auto 5px;
+}
+
+.login-btns {
+	background-color: #f4e842;
+	font-size: 18px;
+	margin-bottom:20px;
+	margin-top:20px;
+
 }
 
 .background-pic {
@@ -87,3 +122,93 @@ button {
 .error {
 	color: red;
 }
+
+
+/* profile */
+
+.upload-form-container {
+	margin: 50px;
+}
+
+
+.upload-form {
+ margin-right: 25%;
+ margin-left: 25%;
+}
+
+.upload-button {
+}
+
+
+/* Home Page */
+
+.home-page{
+	background-color: #fffff9;
+}
+.home-page-heading{
+	font-family: 'Raleway', sans-serif;
+	text-align: center;
+	text-shadow: 2px 2px 2px #000;
+	font-size: 25px;
+	padding-top: 4%;
+color: #fff723;
+}
+
+
+
+.header-container-nav {
+	overflow: hidden;
+	background-color: #fffff2;
+	border-bottom: 1px;
+	border-style: solid;
+	border-color: #000;
+}
+
+.header-container-nav-paths {
+	font-family: 'Raleway', sans-serif;
+	color: #000;
+	text-decoration: none;
+	float: left;
+	font-size: 17px;
+	text-transform: uppercase;
+	display: block;
+	text-align: center;
+	padding: 18px 16px;
+}
+
+.header-container-nav a:hover {
+	background-color: #000;
+	color: #fff959;
+}
+
+.header-container-nav-username a {
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+	text-decoration: none;
+	float: right;
+	font-size: 20px;
+	color: #000;
+	display: block;
+	text-align: center;
+	padding: 18px 16px;
+}
+
+.header-container-nav-logo {
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-image: url("/images/camera.png");
+	float: right;
+	}
+
+	.homepage-images {
+		padding-top: 5%;
+	}
+
+
+	.uploaded-images {
+		border-style: solid;
+		border-radius: 10%;
+		border-color: #000;
+		margin-left: 20px;
+		margin-right:20px;
+	}

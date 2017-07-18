@@ -2,7 +2,7 @@
 
 
 		<div class="header-container-nav">
-					<h1 class="header-container-nav-username"><a  href="/home"><%- username %></a></h1>
+					<h1 class="header-container-nav-username"><a  href="/home"><%= username %></a></h1>
 					<a class="header-container-nav-paths" href="/profile">Profile</a>
 					<a class="header-container-nav-paths" href="/logout">Logout</a>
 		</div>
@@ -15,7 +15,17 @@
 			<a href = "/pics/pic/<%- pics[i].get('id') %>">
 				<img class="uploaded-images" src ="<%- pics[i].getPreviewSrc() %>"/>
       </a>
+
 			<h4><%- pics[i].get("description") %></h4>
+
+
+   <% for (let j = 0; j < pics[i].comments.length; j++) { %>
+		 <%- pics[i].comments[j].comment %>
+	 <% } %>
+    <form method="post" action="photo/<%=pics[i].id%>/comment">
+				<textarea name="comment" type= "text" placeholder="Enter comments here..."></textarea>
+				<button>Submit</button>
+		</form>
 
    </div>
     <% } %>

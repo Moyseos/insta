@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 
+const Comments = require("../models/comments");
 const User = require("../models/user");
 const File = require("../models/file");
 const renderTemplate = require("../util/renderTemplate");
@@ -18,7 +19,7 @@ router.get("/home",requireLoggedIn, function(req, res) {
 		message = "File uploaded succesfully!";
 	}
 
-	req.user.getFiles().then(function(pics) {
+	req.user.getFiles({ include: [Comments] }).then(function(pics) {
 		renderTemplate(req, res, "My Documents", "home", {
 			username: req.user.get("username"),
 			pics: pics,
@@ -26,6 +27,8 @@ router.get("/home",requireLoggedIn, function(req, res) {
 		});
 	});
 });
+
+
 
 // Render an upload form that POSTs to /docs/upload
 router.get("/profile", requireLoggedIn, function(req, res) {

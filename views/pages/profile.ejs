@@ -1,4 +1,8 @@
-<form class="upload" enctype="multipart/form-data" method="post" action ="/home">
+
+
+<div class="profile-page">
+<div class="upload-form-container">
+<form class="upload-form" enctype="multipart/form-data" method="post" action ="/home">
 	<% if (typeof error !== "undefined") { %>
 		<p class="upload-error">
 			<%- error %>
@@ -6,5 +10,7 @@
 	<% } %>
 	<input type="file" name="file"/>
 	<textarea name="description" placeholder="Descripe Your Image"></textarea>
-	<button>Upload</button>
+	<button class="upload-button">Upload</button>
 </form>
+</div>
+</div>
