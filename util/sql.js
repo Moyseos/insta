@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 let sql;
 
 if (process.env.DATABASE_URL) {
-	sql = new Sequelize(process.env.Database_URL);
+	sql = new Sequelize(process.env.DATABASE_URL);
 }
 else {
 	sql = new Sequelize({
@@ -13,6 +13,7 @@ else {
 		host: process.env.DB_HOST || "localhost",
 		port: process.env.DB_PORT || 5432,
 		dialect: "postgres",
+		logging: false,
 	});
 }
 module.exports = sql;
