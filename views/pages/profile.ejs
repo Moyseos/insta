@@ -1,15 +1,15 @@
 
 
 <div class="profile-page">
-<div class="upload-form-container">
-<form class="upload-form" enctype="multipart/form-data" method="post" action ="/home">
+<div class="upload-container">
+<form class="upload-container-form" enctype="multipart/form-data" method="post" action ="/home">
 	<% if (typeof error !== "undefined") { %>
 		<p class="upload-error">
 			<%- error %>
 		</p>
 	<% } %>
-	<input type="file" name="file"/>
-	<textarea name="description" placeholder="Descripe Your Image"></textarea>
+	<input class="uploader-input" type="file" name="file"/>
+	<input class="uploader-description-input" method="post" type="text" name="description" placeholder="Descripe Your Image">
 	<button class="upload-button">Upload</button>
 </form>
 </div>
