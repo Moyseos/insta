@@ -52,7 +52,7 @@ app.post("/signup", function(req, res) {
 	})
 	.then(function(user) {
 		req.session.userid = user.id;
-		res.redirect("/");
+		res.redirect("/home");
 	})
 	.catch(function(err) {
 		console.log(err);
