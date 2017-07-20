@@ -13,7 +13,9 @@
 	<% for (let i = 0; i < pics.length; i++) { %>
     <div class= pic>
 			<a href = "/pics/pic/<%- pics[i].get('id') %>">
-				<img class="uploaded-images" src ="<%- pics[i].getPreviewSrc() %>"/>
+				<a class"uploaded-images-atag" href="<%- pics[i].getPreviewSrc() %>" target="_self">
+					<img class="uploaded-images" src ="<%- pics[i].getPreviewSrc() %>"/>
+				</a>
       </a>
 
 			<h4><%- pics[i].get("description") %></h4>
